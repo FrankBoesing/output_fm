@@ -123,11 +123,12 @@ void AudioOutputFM::isr(void)
 	if (block) {
 		src = block->data;		
 		do {
-			*dest++ =((((*src++) + 32767) >> 15));
+			//*dest++ =((((*src++) + 32767) >> 15));
 			//Try these(?):
 			//*dest++ =4+((((*src++) + 32767) >> 14));		
 			//*dest++ =4+((((*src++) + 32767) >> 13));
 			//*dest++ =4+((((*src++) + 32767) >> 12));
+			*dest++ =15-((((*src++) + 32767) >> 14));
 		} while (dest < end);
 		
 		AudioStream::release(block);
